@@ -1,0 +1,46 @@
+﻿<Page x:Class="GamesApp.AddEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GamesApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddEditPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Название игры" HorizontalAlignment="Center" VerticalAlignment="Center" Height="15" Width="84"></TextBlock>
+        <TextBlock Text="Описание" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="15" Width="56"></TextBlock>
+        <TextBlock Text="Дата выхода" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="15" Width="68"></TextBlock>
+        <TextBlock Text="Статус" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="15" Width="36"></TextBlock>
+        <TextBlock Text="Оценка" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Height="15" Width="40"></TextBlock>
+        <TextBlock Text="Жанр" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Text="Разработчик" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+        <TextBlock Text="Издатель" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+        <TextBox MaxLength="50"  Text="{Binding Game_name}" Grid.Column="1" Grid.Row="0" Width="800" HorizontalAlignment="Left"/>
+        <TextBox MaxLength="300" Text="{Binding Description}" Grid.Column="1" Grid.Row="1" Width="800" HorizontalAlignment="Left"/>
+        <TextBox MaxLength="10" Text="{Binding Release_date}" Grid.Column="1" Grid.Row="2" Width="800" HorizontalAlignment="Left"/>
+        <TextBox MaxLength="10" Text="{Binding Game_status}" Grid.Column="1" Grid.Row="3" Width="800" HorizontalAlignment="Left"/>
+        <TextBox MaxLength="3" Text="{Binding Rate}" Grid.Column="1" Grid.Row="4" Width="800" HorizontalAlignment="Left"/>
+        <ComboBox SelectedItem="{Binding Genres}" Grid.Row="5" Grid.Column="1" x:Name="ComboGenre" DisplayMemberPath="Genre_name" Width="300" HorizontalAlignment="Left"></ComboBox>
+        <ComboBox SelectedItem="{Binding Developers}" Grid.Row="6" Grid.Column="1" x:Name="ComboDeveloper" DisplayMemberPath="Developer_name" Width="300" HorizontalAlignment="Left"></ComboBox>
+        <ComboBox SelectedItem="{Binding Publishers}" Grid.Row="7" Grid.Column="1" x:Name="ComboPublisher" DisplayMemberPath="Publisher_name" Width="300" HorizontalAlignment="Left"></ComboBox>
+
+        <Button Content="Сохранить" Grid.Row="8" Name="BtnSave" Click="BtnSave_Click" Grid.Column="1" />
+    </Grid>
+</Page>

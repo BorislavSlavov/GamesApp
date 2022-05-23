@@ -1,0 +1,64 @@
+﻿<Page x:Class="GamesApp.GamesListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GamesApp"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GamesListPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Введите название для поиска " Width="175" TextAlignment="Right"></TextBlock>
+                <TextBox Width="225" Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Выберите жанр " Width="175" TextAlignment="Right"></TextBlock>
+                <ComboBox Width="225" Name="ComboGenre" SelectionChanged="ComboGenre_SelectionChanged" DisplayMemberPath="Genre_name" SelectedIndex="0"></ComboBox>
+            </StackPanel>
+            <CheckBox x:Name="CheckStatus" Checked="CheckStatus_Checked" Unchecked="CheckStatus_Checked" Content="Показывать только вышедшие игры" HorizontalAlignment="Center"></CheckBox>
+        </WrapPanel>
+        <ListView Grid.Row="1" Name="LViewGames">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="400"></ColumnDefinition>
+                            <ColumnDefinition Width="510"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70"></RowDefinition>
+                            <RowDefinition Height="310"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Image Height="300" Width="300" Grid.Row="1" Stretch="UniformToFill" HorizontalAlignment="Center" Margin="5">
+                            <Image.Source>
+                                <Binding Path="Picture">
+                                    <Binding.TargetNullValue>
+                                        <ImageSource>Resources/pic_icon.png</ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
+                        <TextBlock Text="{Binding Game_name}" VerticalAlignment="Center" TextAlignment="Center" Width="390"
+                                   TextWrapping="Wrap" HorizontalAlignment="Center" Margin="5 5" FontSize="26" Grid.Row="0"></TextBlock>
+                        <TextBlock Text="{Binding Release_date}" Grid.Row="2" Margin="5 15 5 15" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"></TextBlock>
+                        <TextBlock Text="{Binding Rate,StringFormat={}Оценка: {0}}" Grid.Row="3" FontSize="14" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock Text="{Binding Genres.Genre_name,StringFormat={}Жанр: {0}}" Grid.Row="3" FontSize="14" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Text="{Binding Status_game}" Grid.Row="2" FontSize="14" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Text="{Binding Description}" Margin="5 100 5 15" Grid.Column="1" Grid.Row="1" FontSize="20" HorizontalAlignment="Left" FontFamily="Timew New Roman" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock Text="{Binding Developers.Developer_name,StringFormat={}Разработчик: {0}}" Grid.Column="1" Grid.Row="1" FontSize="14" HorizontalAlignment="Left" FontFamily="Timew New Roman" TextWrapping="Wrap"></TextBlock>
+                        <TextBlock Text="{Binding Publishers.Publisher_name,StringFormat={}Издатель: {0}}" Margin="0 25 5 15" Grid.Column="1" Grid.Row="1" FontSize="14" HorizontalAlignment="Left" FontFamily="Timew New Roman" TextWrapping="Wrap"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

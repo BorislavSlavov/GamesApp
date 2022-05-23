@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище GamesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Developers">
+          <Key>
+            <PropertyRef Name="Developer_code" />
+          </Key>
+          <Property Name="Developer_code" Type="int" Nullable="false" />
+          <Property Name="Developer_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="Game_code" />
+          </Key>
+          <Property Name="Game_code" Type="int" Nullable="false" />
+          <Property Name="Developer_code" Type="int" />
+          <Property Name="Publisher_code" Type="int" />
+          <Property Name="Genre_code" Type="int" />
+          <Property Name="Game_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Release_date" Type="date" />
+          <Property Name="Game_status" Type="bit" Nullable="false" />
+          <Property Name="Picture" Type="nvarchar(max)" />
+          <Property Name="Rate" Type="real" />
+        </EntityType>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="Genre_code" />
+          </Key>
+          <Property Name="Genre_code" Type="int" Nullable="false" />
+          <Property Name="Genre_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Publishers">
+          <Key>
+            <PropertyRef Name="Publisher_code" />
+          </Key>
+          <Property Name="Publisher_code" Type="int" Nullable="false" />
+          <Property Name="Publisher_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="Rating_code" />
+          </Key>
+          <Property Name="Rating_code" Type="int" Nullable="false" />
+          <Property Name="User_code" Type="int" />
+          <Property Name="Game_code" Type="int" />
+          <Property Name="User_rating" Type="real" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_code" />
+          </Key>
+          <Property Name="User_code" Type="int" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Games_Developers">
+          <End Role="Developers" Type="Self.Developers" Multiplicity="0..1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Developers">
+              <PropertyRef Name="Developer_code" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="Developer_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_Genres">
+          <End Role="Genres" Type="Self.Genres" Multiplicity="0..1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="Genre_code" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="Genre_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_Publishers">
+          <End Role="Publishers" Type="Self.Publishers" Multiplicity="0..1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publishers">
+              <PropertyRef Name="Publisher_code" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="Publisher_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_Games">
+          <End Role="Games" Type="Self.Games" Multiplicity="0..1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="Game_code" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="Game_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_code" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="User_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище GamesModelContainer">
+          <EntitySet Name="Developers" EntityType="Self.Developers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Publishers" EntityType="Self.Publishers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Games_Developers" Association="Self.FK_Games_Developers">
+            <End Role="Developers" EntitySet="Developers" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_Genres" Association="Self.FK_Games_Genres">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_Publishers" Association="Self.FK_Games_Publishers">
+            <End Role="Publishers" EntitySet="Publishers" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_Games" Association="Self.FK_Rating_Games">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_Users" Association="Self.FK_Rating_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GamesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Developers">
+          <Key>
+            <PropertyRef Name="Developer_code" />
+          </Key>
+          <Property Name="Developer_code" Type="Int32" Nullable="false" />
+          <Property Name="Developer_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Games" Relationship="Self.FK_Games_Developers" FromRole="Developers" ToRole="Games" />
+        </EntityType>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="Game_code" />
+          </Key>
+          <Property Name="Game_code" Type="Int32" Nullable="false" />
+          <Property Name="Developer_code" Type="Int32" />
+          <Property Name="Publisher_code" Type="Int32" />
+          <Property Name="Genre_code" Type="Int32" />
+          <Property Name="Game_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Release_date" Type="DateTime" Precision="0" />
+          <Property Name="Game_status" Type="Boolean" Nullable="false" />
+          <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Single" />
+          <NavigationProperty Name="Developers" Relationship="Self.FK_Games_Developers" FromRole="Games" ToRole="Developers" />
+          <NavigationProperty Name="Genres" Relationship="Self.FK_Games_Genres" FromRole="Games" ToRole="Genres" />
+          <NavigationProperty Name="Publishers" Relationship="Self.FK_Games_Publishers" FromRole="Games" ToRole="Publishers" />
+          <NavigationProperty Name="Rating" Relationship="Self.FK_Rating_Games" FromRole="Games" ToRole="Rating" />
+        </EntityType>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="Genre_code" />
+          </Key>
+          <Property Name="Genre_code" Type="Int32" Nullable="false" />
+          <Property Name="Genre_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Games" Relationship="Self.FK_Games_Genres" FromRole="Genres" ToRole="Games" />
+        </EntityType>
+        <EntityType Name="Publishers">
+          <Key>
+            <PropertyRef Name="Publisher_code" />
+          </Key>
+          <Property Name="Publisher_code" Type="Int32" Nullable="false" />
+          <Property Name="Publisher_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Games" Relationship="Self.FK_Games_Publishers" FromRole="Publishers" ToRole="Games" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="Rating_code" />
+          </Key>
+          <Property Name="Rating_code" Type="Int32" Nullable="false" />
+          <Property Name="User_code" Type="Int32" />
+          <Property Name="Game_code" Type="Int32" />
+          <Property Name="User_rating" Type="Single" />
+          <NavigationProperty Name="Games" Relationship="Self.FK_Rating_Games" FromRole="Rating" ToRole="Games" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Rating_Users" FromRole="Rating" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_code" />
+          </Key>
+          <Property Name="User_code" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Rating" Relationship="Self.FK_Rating_Users" FromRole="Users" ToRole="Rating" />
+        </EntityType>
+        <Association Name="FK_Games_Developers">
+          <End Role="Developers" Type="Self.Developers" Multiplicity="0..1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Developers">
+              <PropertyRef Name="Developer_code" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="Developer_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_Genres">
+          <End Role="Genres" Type="Self.Genres" Multiplicity="0..1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="Genre_code" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="Genre_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_Publishers">
+          <End Role="Publishers" Type="Self.Publishers" Multiplicity="0..1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publishers">
+              <PropertyRef Name="Publisher_code" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="Publisher_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_Games">
+          <End Role="Games" Type="Self.Games" Multiplicity="0..1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="Game_code" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="Game_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_code" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="User_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GamesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Developers" EntityType="Self.Developers" />
+          <EntitySet Name="Games" EntityType="Self.Games" />
+          <EntitySet Name="Genres" EntityType="Self.Genres" />
+          <EntitySet Name="Publishers" EntityType="Self.Publishers" />
+          <EntitySet Name="Rating" EntityType="Self.Rating" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Games_Developers" Association="Self.FK_Games_Developers">
+            <End Role="Developers" EntitySet="Developers" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_Genres" Association="Self.FK_Games_Genres">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_Publishers" Association="Self.FK_Games_Publishers">
+            <End Role="Publishers" EntitySet="Publishers" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_Games" Association="Self.FK_Rating_Games">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_Users" Association="Self.FK_Rating_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище GamesModelContainer" CdmEntityContainer="GamesEntities">
+          <EntitySetMapping Name="Developers">
+            <EntityTypeMapping TypeName="GamesModel.Developers">
+              <MappingFragment StoreEntitySet="Developers">
+                <ScalarProperty Name="Developer_code" ColumnName="Developer_code" />
+                <ScalarProperty Name="Developer_name" ColumnName="Developer_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="GamesModel.Games">
+              <MappingFragment StoreEntitySet="Games">
+                <ScalarProperty Name="Game_code" ColumnName="Game_code" />
+                <ScalarProperty Name="Developer_code" ColumnName="Developer_code" />
+                <ScalarProperty Name="Publisher_code" ColumnName="Publisher_code" />
+                <ScalarProperty Name="Genre_code" ColumnName="Genre_code" />
+                <ScalarProperty Name="Game_name" ColumnName="Game_name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Release_date" ColumnName="Release_date" />
+                <ScalarProperty Name="Game_status" ColumnName="Game_status" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="GamesModel.Genres">
+              <MappingFragment StoreEntitySet="Genres">
+                <ScalarProperty Name="Genre_code" ColumnName="Genre_code" />
+                <ScalarProperty Name="Genre_name" ColumnName="Genre_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Publishers">
+            <EntityTypeMapping TypeName="GamesModel.Publishers">
+              <MappingFragment StoreEntitySet="Publishers">
+                <ScalarProperty Name="Publisher_code" ColumnName="Publisher_code" />
+                <ScalarProperty Name="Publisher_name" ColumnName="Publisher_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rating">
+            <EntityTypeMapping TypeName="GamesModel.Rating">
+              <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="Rating_code" ColumnName="Rating_code" />
+                <ScalarProperty Name="User_code" ColumnName="User_code" />
+                <ScalarProperty Name="Game_code" ColumnName="Game_code" />
+                <ScalarProperty Name="User_rating" ColumnName="User_rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GamesModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="GamesModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="User_code" ColumnName="User_code" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
