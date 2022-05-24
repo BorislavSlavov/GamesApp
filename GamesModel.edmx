@@ -24,7 +24,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="Release_date" Type="date" />
           <Property Name="Game_status" Type="bit" Nullable="false" />
-          <Property Name="Picture" Type="nvarchar(max)" />
+          <Property Name="Picture" Type="varbinary(max)" />
           <Property Name="Rate" Type="real" />
         </EntityType>
         <EntityType Name="Genres">
@@ -182,7 +182,7 @@
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Release_date" Type="DateTime" Precision="0" />
           <Property Name="Game_status" Type="Boolean" Nullable="false" />
-          <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Rate" Type="Single" />
           <NavigationProperty Name="Developers" Relationship="Self.FK_Games_Developers" FromRole="Games" ToRole="Developers" />
           <NavigationProperty Name="Genres" Relationship="Self.FK_Games_Genres" FromRole="Games" ToRole="Genres" />

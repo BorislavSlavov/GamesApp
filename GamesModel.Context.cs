@@ -15,17 +15,9 @@ namespace GamesApp
     
     public partial class GamesEntities : DbContext
     {
-        private static GamesEntities _context;
         public GamesEntities()
             : base("name=GamesEntities")
         {
-        }
-        public static GamesEntities GetContext()
-        {
-            if (_context == null)
-                _context = new GamesEntities();
-
-            return _context;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

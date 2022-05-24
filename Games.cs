@@ -28,14 +28,7 @@ namespace GamesApp
         public string Description { get; set; }
         public Nullable<System.DateTime> Release_date { get; set; }
         public bool Game_status { get; set; }
-        public string Status_game
-        {
-            get
-            {
-                return (Game_status) ? "Released" : "Announced";
-            }
-        }
-        public string Picture { get; set; }
+        public byte[] Picture { get; set; }
         public Nullable<float> Rate { get; set; }
     
         public virtual Developers Developers { get; set; }

@@ -276,6 +276,9 @@
     <Resource Include="Resources\pic_icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\gameslogo.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="GamesModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GamesModel.edmx</DependentUpon>

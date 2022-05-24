@@ -12,8 +12,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <Image HorizontalAlignment="left" Width="72"/>
-        <TextBlock Text="База данных любителя видеоигр" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Games" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Grid Background="#FFABC8FB" Panel.ZIndex="-2"/>
         <Grid Grid.Row="2" Background="#FF4545FF"/>
         <Frame NavigationUIVisibility="Hidden" Grid.Row="1" Name="MainFrame" ContentRendered="MainFrame_ContentRendered"></Frame>
